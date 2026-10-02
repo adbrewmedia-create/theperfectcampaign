@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>8-0 · The Perfect Campaign</title>
+<meta name="description" content="Draft a stable of eight racing legends and see if it can go 8 from 8. A free horse racing game.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="8-0: The Perfect Campaign">
+<meta property="og:description" content="Draft a stable of eight racing legends and see if it can win every race. Can you go 8-0?">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f6f3ec;--card:#ffffff;--ink:#17261e;--mut:#667269;--accent:#0f5a3a;--accent-ink:#ffffff;
+  --gold:#a67a1f;--line:#ded7c7;--good:#1f8a4c;--amber:#b87d0c;--bad:#b3402f;--soft:#efeadd;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1410;--card:#14201a;--ink:#ecefe8;--mut:#9aa89f;--accent:#3fbf84;--accent-ink:#06130c;
+  --gold:#e0b04a;--line:#253429;--good:#46c57f;--amber:#e0a53a;--bad:#ef7a66;--soft:#192820;}}
+:root[data-theme="dark"]{
+  --bg:#0c1410;--card:#14201a;--ink:#ecefe8;--mut:#9aa89f;--accent:#3fbf84;--accent-ink:#06130c;
+  --gold:#e0b04a;--line:#253429;--good:#46c57f;--amber:#e0a53a;--bad:#ef7a66;--soft:#192820;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 48px}
+h1,h2,h3{font-family:Fraunces,Georgia,"Times New Roman",serif;margin:0;letter-spacing:-.01em}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.logo{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:28px;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-align:left;display:flex;align-items:baseline;gap:0}
+.logo:hover,.logo:focus-visible{opacity:.78;outline:none}
+.logo small{font-family:Inter,system-ui,sans-serif;font-weight:500;font-size:12px;color:var(--mut);margin-left:8px;letter-spacing:.06em;text-transform:uppercase}
+.pill{font-size:12px;padding:4px 10px;border-radius:99px;background:var(--soft);color:var(--mut);border:1px solid var(--line)}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{border:0;border-radius:10px;padding:11px 18px;font-weight:600;background:var(--accent);color:var(--accent-ink)}
+.btn.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.big{padding:16px 28px;font-size:17px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.hero{padding:26px 22px;text-align:center}
+.hero h2{font-size:34px;line-height:1.1;margin-bottom:8px}
+.hero p{color:var(--mut);max-width:560px;margin:0 auto 18px}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}
+.mode{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;align-items:flex-start}
+.mode:hover,.mode:focus-visible{border-color:var(--accent);outline:none}
+.mode b{display:block;font-family:Fraunces,Georgia,serif;font-size:20px;margin-bottom:2px}
+.mode span{color:var(--mut);font-size:14px}
+.mode .go{margin-top:12px;display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:9px 16px;font-weight:600;font-size:14px}
+.mode:hover .go,.mode:focus-visible .go{filter:brightness(1.08)}
+.aboutbtn{margin-top:14px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:6px;color:var(--mut);font-size:14px}
+.steps div{background:var(--soft);border-radius:10px;padding:10px 12px}
+.steps b{color:var(--ink)}
+.sec-t{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:18px 0 8px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.slot{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:10px;text-align:left;min-height:84px;display:flex;flex-direction:column;gap:2px}
+.slot .sl{font-weight:600;font-size:13px}
+.slot .ss{font-size:11px;color:var(--mut)}
+.slot .hn{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:16px;line-height:1.2;margin-top:4px}
+.slot .hs{font-size:12px;color:var(--mut)}
+.slot.filled{border-style:solid;border-color:var(--accent);background:var(--soft)}
+.slot.can{cursor:pointer;border-style:solid}
+.slot.can.good{border-color:var(--good)}.slot.can.amber{border-color:var(--amber)}.slot.can.bad{border-color:var(--bad)}
+.slot.no{opacity:.4}
+.chip{font-size:11px;font-weight:600;border-radius:99px;padding:2px 8px;margin-top:auto;align-self:flex-start;border:1px solid currentColor}
+.chip.good{color:var(--good)}.chip.amber{color:var(--amber)}.chip.bad{color:var(--bad)}
+.pool{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.horse{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.horse:hover,.horse:focus-visible{border-color:var(--accent);outline:none}
+.horse.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.horse.dim{opacity:.4}
+.horse .n{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:17px;line-height:1.2}
+.horse .m{font-size:12px;color:var(--mut)}
+.badge{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:0 5px;align-self:flex-start}
+.bar{height:6px;background:var(--soft);border-radius:4px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--accent)}
+.spinbox{text-align:center;padding:34px 16px}
+.spinbox p{color:var(--mut);margin:0 0 16px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.era{font-family:Fraunces,Georgia,serif;font-size:20px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.stat{background:var(--soft);border-radius:12px;padding:12px}
+.stat b{display:block;font-family:Fraunces,Georgia,serif;font-size:26px}
+.stat span{font-size:12px;color:var(--mut)}
+.rrow{display:grid;grid-template-columns:120px 1fr auto;gap:6px 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.rrow:last-child{border-bottom:0}
+.rrow .sn{font-size:12px;color:var(--mut);font-weight:600}
+.rrow .hn{font-family:Fraunces,Georgia,serif;font-weight:600}
+.rrow .hm{font-size:12px;color:var(--mut)}
+.res{font-weight:700;min-width:54px;text-align:right}
+.res.w{color:var(--good)}.res.l{color:var(--bad)}.res.p{color:var(--mut);font-weight:500}
+.banner{text-align:center;padding:26px 16px;border-radius:14px;background:var(--soft);border:1px solid var(--line);margin-bottom:12px}
+.banner h2{font-size:32px;color:var(--accent)}
+.banner.top h2{color:var(--gold)}
+.banner p{margin:6px 0 0;color:var(--mut)}
+textarea{width:100%;min-height:96px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);padding:10px;font:13px/1.4 Inter,system-ui,sans-serif;margin-top:10px}
+.legend{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:13px;color:var(--mut)}
+.legend summary{cursor:pointer;font-weight:600;color:var(--ink);list-style:none}
+.legend summary::-webkit-details-marker{display:none}
+.legend summary::after{content:" ▾";color:var(--mut)}
+.legend[open] summary::after{content:" ▴"}
+.legend .lg{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:start;margin-top:8px}
+.legend .lg .chip{margin-top:1px;white-space:nowrap}
+.legend p{margin:8px 0 0}
+.sm{padding:6px 12px;font-size:13px}
+.navr{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.modal-back{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:420px;width:100%;padding:20px;max-height:90vh;overflow:auto}
+.field{display:flex;flex-direction:column;gap:4px;margin:10px 0}
+.field label{font-size:13px;font-weight:600}
+.field input{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px;font:inherit}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--mut);margin:8px 0}
+.chk input{margin-top:3px}
+.err{color:var(--bad);font-size:13px;min-height:18px}
+.tabs{display:flex;gap:6px;margin:12px 0}
+.tab{border:1px solid var(--line);background:transparent;border-radius:99px;padding:6px 14px;font-weight:600;font-size:13px}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.lbrow{display:grid;grid-template-columns:34px 1fr auto auto;gap:10px;align-items:center;padding:10px 6px;border-bottom:1px solid var(--line)}
+.lbrow:last-child{border-bottom:0}
+.lbrow.me{background:var(--soft);border-radius:8px}
+.rank{font-family:Fraunces,Georgia,serif;font-weight:800;color:var(--gold)}
+.lbrow .nm{font-weight:600}
+.lbrow .tr{font-size:12px;color:var(--mut)}
+.lbrow .sc{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:18px}
+.sharegrid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sb{display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:10px 14px;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none}
+.sb.wa{background:#25d366;border-color:#25d366;color:#06210f}
+.sb:hover,.sb:focus-visible{border-color:var(--accent);outline:none}
+.linkbox{width:100%;margin-top:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:9px;font:12px/1.3 Inter,system-ui,sans-serif}
+.stack>*+*{margin-top:12px}
+.draft{display:grid;grid-template-columns:minmax(290px,1fr) 1.15fr;gap:14px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ph{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ph .era{font-size:19px;line-height:1.1}
+.ph .sub{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.prompt{padding:9px 14px;border-bottom:1px solid var(--line);background:var(--soft);font-size:13px;color:var(--ink)}
+.prompt b{color:var(--gold)}
+.plist{max-height:460px;overflow:auto}
+.prow{display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--line);border-left:3px solid transparent;color:inherit}
+.prow:last-child{border-bottom:0}
+.prow:not(:disabled):hover{background:var(--soft)}
+.prow.sel{background:var(--soft);border-left-color:var(--accent)}
+.prow:disabled{opacity:.35}
+.prow .tag{flex:none;min-width:56px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.03em;border:1px solid var(--line);border-radius:6px;padding:3px 5px;color:var(--mut)}
+.prow .tag.juv{color:var(--gold);border-color:var(--gold)}
+.prow .mid{flex:1;min-width:0}
+.prow .nm,.prow .me{display:block}
+.prow .nm{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:16px;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prow .me{font-size:11px;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prow .rt{flex:none;font-family:Fraunces,Georgia,serif;font-weight:800;font-size:19px}
+.spinwrap{padding:18px 14px;text-align:center}
+.reelbox{padding:16px 14px 18px;text-align:center}
+.reelwin{position:relative;height:180px;overflow:hidden;border-radius:12px;background:var(--soft);border:1px solid var(--line);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent)}
+.reelstrip{will-change:transform}
+.reelrow{height:60px;display:flex;align-items:center;justify-content:center;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:20px;color:var(--mut)}
+.reelmark{position:absolute;left:6px;right:6px;top:60px;height:60px;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);pointer-events:none}
+.reelmark::before,.reelmark::after{content:"";position:absolute;top:50%;margin-top:-6px;border:6px solid transparent}
+.reelmark::before{left:-2px;border-left-color:var(--gold)}
+.reelmark::after{right:-2px;border-right-color:var(--gold)}
+.reelbox .cap{margin:12px 0 0;font-size:13px;color:var(--mut)}
+.reelwin.landed .reelrow.hit{color:var(--gold)}
+.yard{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;aspect-ratio:4/3;min-height:330px;background:#2f6b42}
+.yard .trk{position:absolute;inset:0;width:100%;height:100%;display:block}
+.pos{position:absolute;transform:translate(-50%,-50%);width:22%;text-align:center}
+.pos .box{width:100%;max-width:62px;margin:0 auto;display:block}
+.pos .box svg{width:100%;height:auto;display:block;overflow:visible}
+.st-roof{fill:#6b7f72}
+.pos.full .st-roof{fill:var(--accent)}
+.st-body{fill:#f3efe4;stroke:#2c3a31;stroke-width:1.5}
+.st-in{fill:#2c3a31}
+.st-door{fill:#b98a2e;stroke:#f3efe4;stroke-width:1}
+.st-num{fill:#fff;font:700 9px Inter,system-ui,sans-serif}
+.pos .dl,.pos .dr{transition:transform .5s ease;transform-box:fill-box}
+.pos .dl{transform-origin:left center}.pos .dr{transform-origin:right center}
+.pos.full .dl,.pos.full .dr{transform:scaleX(.12)}
+.pos .nagg{opacity:0;transform:scale(0);transform-box:fill-box;transform-origin:center;font-size:19px}
+.pos.full .nagg{opacity:1;transform:scale(1)}
+.pos.pop .nagg{animation:hpop .6s .3s both}
+.pos .pn{margin-top:3px;font-size:11px;font-weight:600;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.75);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pos .pf{font-size:10px;color:rgba(255,255,255,.8);text-shadow:0 1px 3px rgba(0,0,0,.75)}
+.pos .pf.good{color:#93f3bd;font-weight:600}
+.pos .pf.amber{color:#ffd98a;font-weight:600}
+.pos .pf.bad{color:#ff9f8e;font-weight:600}
+.pos.elig .pf{font-size:11px}
+.pos .pn,.pos .pf{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+button.pos{background:none;padding:0;border:0;cursor:pointer}
+.pos.elig .box{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px;animation:pulse 1.6s ease-in-out infinite}
+.pos.out{opacity:.3}
+@keyframes pulse{0%,100%{outline-color:rgba(224,176,74,1)}50%{outline-color:rgba(224,176,74,.35)}}
+@keyframes hpop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.35);opacity:1}100%{transform:scale(1);opacity:1}}
+.yardfoot{text-align:center;font-size:12px;color:var(--mut);margin-top:6px}
+@media (max-width:860px){.draft{grid-template-columns:1fr}.yardbox{order:-1}.yard{min-height:320px}.pos .pn{font-size:10px}.pos .pf{font-size:9px}.plist{max-height:none}}
+@media (prefers-reduced-motion:reduce){.pos.elig .box{animation:none}.pos.pop .nagg{animation:none}}
+.cta{border-color:var(--gold);display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.cta .ad{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+.cta h3{font-size:20px;margin:0}
+.cta p{margin:0;color:var(--mut)}
+.cta a.btn{display:inline-block;text-decoration:none;max-width:100%}
+.cta .rg{font-size:11px;color:var(--mut);line-height:1.5}
+.cta .rg a{color:inherit}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.foot{margin-top:28px;font-size:12px;color:var(--mut)}
+.foot p{margin:4px 0}
+.note{font-size:12px;color:var(--mut);margin-top:8px}
+@media (max-width:520px){.rrow{grid-template-columns:1fr auto}.rrow .sn{grid-column:1/-1}.hero h2{font-size:28px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <button class="logo" data-act="home" aria-label="8-0 — back to the start screen">8-0<small>The Perfect Campaign</small></button>
+    <div id="pill"></div>
+  </div>
+  <div id="app"></div>
+  <div id="modal"></div>
+  <div class="foot">
+    <p><b>Prototype.</b> Horse ratings are approximate placeholder figures compiled for this build and are not official IFHA, Timeform or Racing Post ratings. Replace with a licensed or verified dataset before launch.</p>
+    <p>Independent, unofficial game. Not affiliated with any racing body, racecourse, owner or horse connections. Names are used for identification only.</p>
+  </div>
+</div>
+<script>
+const CONFIG = {
+  k: 6, fitPerF: 0.04, fitFloor: 0.6, wildFlat: 0.95,
+  norm: { rawLo: 112, rawHi: 140, lo: 35, hi: 100 },
+  maxRespins: 3,
+  tiers: [
+    { id: "perfect", name: "8-0 Perfect Campaign", minExp: 0 },
+    { id: "champ", name: "Champion Stable", minExp: 6.0 },
+    { id: "g1", name: "Group 1 Contender", minExp: 4.8 },
+    { id: "listed", name: "Listed Class", minExp: 3.6 },
+    { id: "hcap", name: "Handicapper", minExp: 2.6 },
+    { id: "seller", name: "Seller", minExp: 0 }
+  ]
+};
+const SLOTS = [
+  { id: "juv", label: "Juvenile", sub: "5-7f · 2yo records only", minF: 5, maxF: 7, juv: true, mean: 66 },
+  { id: "spr", label: "Sprint", sub: "5-6f", minF: 5, maxF: 6, mean: 72 },
+  { id: "mile", label: "Mile", sub: "7-8f", minF: 7, maxF: 8, mean: 72 },
+  { id: "mid", label: "Middle distance", sub: "9-11f", minF: 9, maxF: 11, mean: 74 },
+  { id: "cl", label: "Classic 12f", sub: "12f", minF: 12, maxF: 12, mean: 74 },
+  { id: "stay", label: "Stayer", sub: "14f+", minF: 14, maxF: 24, mean: 68 },
+  { id: "fil", label: "Filly / Mare", sub: "6-12f · fillies & mares", minF: 6, maxF: 12, sex: "f", mean: 66 },
+  { id: "wild", label: "Wildcard", sub: "any · 5% penalty", minF: 0, maxF: 99, flat: true, mean: 72 }
+];
+const GROUPS = { GB: "GB/IRE", FR: "France", AU: "Australia", JP: "Japan", US: "USA", HK: "Hong Kong", XX: "World" };
+const ERAS = [
+  { id: "L", label: "Legends (pre-2000)" },
+  { id: "a", label: "The 2000s" },
+  { id: "b", label: "The 2010s" },
+  { id: "c", label: "The 2020s" }
+];
+const RAW = [
+  ["Sea Bird",1965,"FR","m",10,12,140],["Brigadier Gerard",1972,"GB","m",8,10,138],["Mill Reef",1971,"GB","m",8,12,138],
+  ["Nijinsky",1970,"GB","m",8,14,137],["Shergar",1981,"GB","m",10,12,135],["Dancing Brave",1986,"GB","m",10,12,138],
+  ["Montjeu",1999,"FR","m",10,12,133],["Dayjur",1990,"GB","m",5,6,129],["Sagaro",1977,"FR","m",16,20,125],
+  ["Double Trigger",1995,"GB","m",16,20,124],["Dahlia",1973,"GB","f",8,12,128],["Allez France",1974,"FR","f",10,12,128],
+  ["Habibti",1983,"GB","f",5,6,126],["Secretariat",1973,"US","m",10,12,140],["Citation",1948,"US","m",8,12,134],
+  ["Man o' War",1920,"US","m",8,12,136],["Phar Lap",1931,"AU","m",8,16,133],["Tulloch",1960,"AU","m",8,12,128],
+  ["Kincsem",1878,"XX","f",8,16,130],
+  ["Dubai Millennium",2000,"GB","m",8,12,136],["Giant's Causeway",2000,"GB","m",8,10,133],["Sunline",2000,"AU","f",8,10,128],
+  ["Tiznow",2000,"US","m",10,10,126],["Galileo",2001,"GB","m",10,12,132],["Sakhee",2001,"GB","m",10,12,129],
+  ["Rock of Gibraltar",2002,"GB","m",7,8,128],["Hawk Wing",2002,"GB","m",8,10,127],["Falbrav",2003,"GB","m",8,10,128],
+  ["Dalakhani",2003,"FR","m",10,12,130],["Oasis Dream",2003,"GB","m",5,6,128],["Choisir",2003,"AU","m",5,6,124],
+  ["Ouija Board",2004,"GB","f",12,12,126],["Lonhro",2004,"AU","m",8,10,126],["Hurricane Run",2005,"FR","m",12,12,134],
+  ["Dubawi",2005,"GB","m",8,8,129],["Makybe Diva",2005,"AU","f",12,16,127],["Silent Witness",2005,"HK","m",5,6,128],
+  ["Deep Impact",2006,"JP","m",12,12,135],["Dylan Thomas",2007,"GB","m",12,12,128],["Yeats",2007,"GB","m",16,20,126],
+  ["Authorized",2007,"GB","m",10,12,127],["Duke of Marmalade",2008,"GB","m",10,12,129],["Zarkava",2008,"FR","f",10,12,130],
+  ["Conduit",2008,"GB","m",12,12,126],["Henrythenavigator",2008,"GB","m",8,8,126],["Curlin",2008,"US","m",9,12,130],
+  ["Sea The Stars",2009,"GB","m",8,12,140],["Goldikova",2009,"FR","f",7,9,130],["Zenyatta",2009,"US","f",9,10,128],
+  ["Rachel Alexandra",2009,"US","f",9,10,126],
+  ["Rock of Gibraltar",2001,"GB","m",6,8,118,1],["Johannesburg",2001,"GB","m",6,8,120,1],["Mastercraftsman",2008,"GB","m",6,8,119,1],
+  ["Frankel",2010,"GB","m",7,8,124,1],["Workforce",2010,"GB","m",12,12,130],["Harbinger",2010,"GB","m",12,12,135],
+  ["Camelot",2011,"GB","m",7,8,122,1],["Frankel",2012,"GB","m",8,10,140],["Black Caviar",2012,"AU","f",5,6,130],
+  ["Cirrus des Aigles",2012,"FR","m",10,12,128],["Orfevre",2012,"JP","m",12,12,128],["Gentildonna",2013,"JP","f",12,12,126],
+  ["Lord Kanaloa",2013,"JP","m",5,6,124],["Treve",2014,"FR","f",12,12,130],["Able Friend",2014,"HK","m",8,10,129],
+  ["Golden Horn",2015,"GB","m",10,12,130],["American Pharoah",2015,"US","m",8,12,130],["Gleneagles",2015,"GB","m",8,10,127],
+  ["Solow",2015,"FR","m",8,8,126],["Maurice",2015,"JP","m",8,9,124],["Almanzor",2016,"FR","m",10,12,127],
+  ["Minding",2016,"GB","f",8,10,128],["Highland Reel",2016,"GB","m",10,12,127],["Postponed",2016,"GB","m",12,12,126],
+  ["Arrogate",2016,"US","m",9,10,134],["California Chrome",2016,"US","m",9,10,127],["Winx",2017,"AU","f",8,10,132],
+  ["Lady Aurelia",2017,"GB","f",5,6,121],["Big Orange",2017,"GB","m",14,20,122],["Enable",2018,"GB","f",10,12,128],
+  ["Cracksman",2018,"GB","m",10,12,130],["Battaash",2018,"GB","m",5,5,128],["Roaring Lion",2018,"GB","m",8,10,127],
+  ["Justify",2018,"US","m",8,12,126],["Almond Eye",2018,"JP","f",8,12,129],["Beauty Generation",2018,"HK","m",8,10,125],
+  ["Alpha Centauri",2018,"GB","f",8,8,125],["Too Darn Hot",2018,"GB","m",7,8,124,1],["Stradivarius",2019,"GB","m",16,20,123],
+  ["Blue Point",2019,"GB","m",5,6,120],["Pinatubo",2019,"GB","m",6,7,128,1],
+  ["Contrail",2020,"JP","m",10,12,127],["Love",2020,"GB","f",10,12,126],["St Mark's Basilica",2020,"GB","m",7,8,121,1],
+  ["Mishriff",2021,"GB","m",10,12,127],["Snowfall",2021,"GB","f",12,12,126],["St Mark's Basilica",2021,"FR","m",8,10,130],
+  ["Golden Sixty",2021,"HK","m",8,10,128],["Baaeed",2022,"GB","m",8,10,135],["Flightline",2022,"US","m",7,9,136],
+  ["Kyprios",2022,"GB","m",14,20,121],["Nature Strip",2022,"AU","m",5,6,125],["Native Trail",2022,"GB","m",6,7,122,1],
+  ["Equinox",2023,"JP","m",10,12,132],["Paddington",2023,"GB","m",8,10,126],["Auguste Rodin",2023,"GB","m",10,12,128],
+  ["Ace Impact",2023,"FR","m",12,12,125],["City of Troy",2024,"GB","m",10,10,124],["Romantic Warrior",2024,"HK","m",8,10,128],
+  ["Ka Ying Rising",2025,"HK","m",5,6,124]
+];
+function normRating(raw) {
+  const c = CONFIG.norm;
+  return Math.max(0, Math.min(100, c.lo + (raw - c.rawLo) * (c.hi - c.lo) / (c.rawHi - c.rawLo)));
+}
+function eraOf(y) { return y < 2000 ? "L" : y < 2010 ? "a" : y < 2020 ? "b" : "c"; }
+const HORSES = RAW.map(r => ({
+  id: r[0].toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "") + "-" + r[1] + (r[7] ? "-j" : ""),
+  name: r[0], year: r[1], grp: r[2], sex: r[3], minF: r[4], maxF: r[5], raw: r[6], juv: !!r[7],
+  norm: normRating(r[6]), era: eraOf(r[1])
+}));
+const HORSE_BY_ID = Object.fromEntries(HORSES.map(h => [h.id, h]));
+function eligible(h, s) {
+  if (s.juv && !h.juv) return false;
+  if (s.sex && h.sex !== s.sex) return false;
+  return true;
+}
+function fitFor(h, s) {
+  if (s.flat) return { gap: 0, fit: CONFIG.wildFlat };
+  let gap = 0;
+  if (h.maxF < s.minF) gap = s.minF - h.maxF;
+  else if (h.minF > s.maxF) gap = h.minF - s.maxF;
+  return { gap, fit: Math.max(CONFIG.fitFloor, 1 - CONFIG.fitPerF * gap) };
+}
+function evalPick(h, s) {
+  const f = fitFor(h, s);
+  const E = h.norm * f.fit;
+  const p = 1 / (1 + Math.exp(-(E - s.mean) / CONFIG.k));
+  return { slot: s, horse: h, gap: f.gap, fit: f.fit, E, p };
+}
+function summarise(rows) {
+  const expectedWins = rows.reduce((a, r) => a + r.p, 0);
+  const pPerfect = rows.reduce((a, r) => a * r.p, 1);
+  let weakest = rows[0];
+  rows.forEach(r => { if (r.p < weakest.p) weakest = r; });
+  return { expectedWins, pPerfect, weakest };
+}
+function tierFor(expectedWins, wins) {
+  if (wins === SLOTS.length) return CONFIG.tiers[0];
+  return CONFIG.tiers.slice(1).find(t => expectedWins >= t.minExp);
+}
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function runSeason(rows, seed) {
+  const rng = mulberry32(seed);
+  return rows.map(r => {
+    const win = rng() < r.p;
+    let pos = 1;
+    if (!win) {
+      pos = 2;
+      const q = Math.max(0.15, Math.min(0.8, 0.25 + (r.slot.mean - r.E) / 60));
+      while (pos < 7 && rng() < q) pos++;
+    }
+    return Object.assign({}, r, { win, pos });
+  });
+}
+function shuffle(a, rnd) {
+  a = a.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function buildPool(openSlots, usedIds, rnd) {
+  rnd = rnd || Math.random;
+  const avail = HORSES.filter(h => !usedIds.has(h.id));
+  for (let tries = 0; tries < 50; tries++) {
+    const era = ERAS[Math.floor(rnd() * ERAS.length)];
+    let pool = shuffle(avail.filter(h => h.era === era.id), rnd).slice(0, 12);
+    if (openSlots.length <= 3) {
+      openSlots.filter(s => s.juv || s.sex).forEach(s => {
+        if (!pool.some(h => eligible(h, s))) {
+          const extra = shuffle(avail.filter(h => eligible(h, s) && !pool.includes(h)), rnd)[0];
+          if (extra) pool = pool.slice(0, 11).concat(extra);
+        }
+      });
+    }
+    if (pool.some(h => openSlots.some(s => eligible(h, s)))) return { era, horses: pool };
+  }
+  return { era: ERAS[0], horses: avail.slice(0, 12) };
+}
+if (typeof module !== "undefined") module.exports = { CONFIG, SLOTS, HORSES, ERAS, eligible, evalPick, summarise, tierFor, runSeason, buildPool, mulberry32, shuffle };
+
+</script>
+<script>
+const $ = s => document.querySelector(s);
+const AD_GATE = false; // set true to put the re-spin behind a rewarded ad
+const reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pct = p => Math.round(p * 100) + "%";
+const pperf = p => { const v = p * 100; return v >= 10 ? v.toFixed(0) + "%" : v >= 1 ? v.toFixed(1) + "%" : v.toFixed(2) + "%"; };
+const ordinal = n => n === 1 ? "1st" : n === 2 ? "2nd" : n === 3 ? "3rd" : n + "th";
+const TIER_BLURB = {
+  perfect: "Eight runners, eight winners. Nobody will believe you.",
+  champ: "A stable for the history books, undone only by racing luck.",
+  g1: "Serious Group 1 operation. A couple of weak spots cost you.",
+  listed: "Competitive on a good day, exposed on a bad one.",
+  hcap: "Plenty of moments, not enough class across the card.",
+  seller: "A few bargains, a lot of hope."
+};
+let S;
+function fresh() {
+  return { screen: "mode", mode: "classic", stable: {}, used: new Set(), pool: null, sel: null, respins: CONFIG.maxRespins,
+    order: [], pop: -1, scrollTo: null, spinning: false, pending: null, complete: false, legend: true, boardMode: "classic", prev: "mode", lbMsg: "", fromLink: false, rows: null, sum: null, seed: 0, run: null, shown: 0, done: false, copy: "" };
+}
+S = fresh();
+
+function clearHash() { try { history.replaceState(null, "", location.pathname + location.search); } catch (_) {} }
+function openSlots() { return SLOTS.filter(s => !S.stable[s.id]); }
+function filled() { return Object.keys(S.stable).length; }
+function startGame(mode) { S = fresh(); S.mode = mode; S.screen = "draft"; render(); }
+const REEL_ROW = 60, REEL_LOOPS = 7;
+function reelItems() { const out = []; for (let i = 0; i < REEL_LOOPS + 2; i++) ERAS.forEach(e => out.push(e)); return out; }
+function reelTargetIndex(eraId) { return REEL_LOOPS * ERAS.length + ERAS.findIndex(e => e.id === eraId); }
+function spin() {
+  if (S.spinning) return;
+  const pool = buildPool(openSlots(), S.used);
+  S.pending = pool; S.spinning = true; S.sel = null; render();
+  const strip = $("#reelstrip");
+  if (reduced || !strip) return finishSpin();
+  const y = (reelTargetIndex(pool.era.id) - 1) * REEL_ROW;
+  const go = () => { strip.style.transition = "transform 3s cubic-bezier(.11,.72,.13,1)"; strip.style.transform = "translateY(-" + y + "px)"; };
+  if (window.requestAnimationFrame) requestAnimationFrame(() => requestAnimationFrame(go)); else go();
+  setTimeout(() => { const w = $("#reelwin"); if (w && w.classList) w.classList.add("landed"); }, 3050);
+  setTimeout(finishSpin, 3550);
+}
+function finishSpin() { S.pool = S.pending; S.pending = null; S.spinning = false; S.scrollTo = "#list"; render(); }
+function respin() {
+  if (S.respins <= 0 || S.spinning) return;
+  S.respins--; spin();
+}
+function pickHorse(id) { S.sel = S.sel === id ? null : id; S.scrollTo = S.sel ? "#yard" : null; render(); }
+function eligibleSlots(h) { return SLOTS.map((s, i) => ({ s, i })).filter(x => !S.stable[x.s.id] && eligible(h, x.s)); }
+function place(slotId) {
+  const h = HORSE_BY_ID[S.sel], s = SLOTS.find(x => x.id === slotId);
+  if (!h || !s || S.stable[s.id] || !eligible(h, s)) return;
+  S.stable[s.id] = evalPick(h, s); S.order.push(s.id);
+  HORSES.forEach(x => { if (x.name === h.name) S.used.add(x.id); });   // one season per horse, not one per record
+  S.pool = null; S.sel = null; S.scrollTo = "#list";
+  S.pop = SLOTS.findIndex(x => x.id === s.id);
+  if (filled() === SLOTS.length) { S.complete = true; render(); S.pop = -1; setTimeout(finish, reduced ? 0 : 1600); }
+  else { render(); S.pop = -1; }
+}
+function finish() {
+  S.rows = SLOTS.map(s => S.stable[s.id]);
+  S.sum = summarise(S.rows);
+  S.seed = Math.floor(Math.random() * 4294967296);
+  S.screen = "result"; S.run = null; S.done = false; S.shown = 0;
+  render(); window.scrollTo(0, 0);
+}
+function runIt() {
+  S.run = runSeason(S.rows, S.seed); S.shown = 0; S.done = false; render(); step();
+}
+function step() {
+  if (S.shown < SLOTS.length) { S.shown++; render(); setTimeout(step, reduced ? 0 : 650); }
+  else { S.done = true; render(); afterRun(); }
+}
+function wins() { return S.run.filter(r => r.win).length; }
+function hashFor() { return "#s=" + S.seed + "&m=" + S.mode + "&h=" + S.rows.map(r => r.horse.id).join(","); }
+function shareText() {
+  const w = wins(), t = tierFor(S.sum.expectedWins, w);
+  return headline() + "\n" +
+    S.rows.map(r => r.slot.label + ": " + r.horse.name + " " + r.horse.year).join("\n") + "\n" + shareLink();
+}
+function shareLink() { return SHARE_BASE + hashFor(); }
+function headline() {
+  const w = wins(), t = tierFor(S.sum.expectedWins, w);
+  return "I went " + w + " from 8 (" + t.name + ") in 8-0, the horse racing stable draft. Can you beat me?";
+}
+function loadHash() {
+  try {
+    const p = new URLSearchParams(location.hash.slice(1));
+    const ids = (p.get("h") || "").split(",").filter(Boolean);
+    if (ids.length !== SLOTS.length) return false;
+    const rows = [];
+    for (let i = 0; i < SLOTS.length; i++) {
+      const h = HORSE_BY_ID[ids[i]];
+      if (!h || !eligible(h, SLOTS[i])) return false;
+      rows.push(evalPick(h, SLOTS[i]));
+    }
+    if (new Set(ids).size !== ids.length) return false;
+    S = fresh(); S.mode = p.get("m") === "expert" ? "expert" : "classic";
+    S.rows = rows; S.sum = summarise(rows); S.seed = (parseInt(p.get("s"), 10) >>> 0);
+    rows.forEach(r => { S.stable[r.slot.id] = r; });
+    S.screen = "result"; S.run = runSeason(rows, S.seed); S.shown = SLOTS.length; S.done = true; S.fromLink = true;
+    return true;
+  } catch (e) { return false; }
+}
+async function copy(text, label) {
+  try { await navigator.clipboard.writeText(text); S.copy = ""; flash(label + " copied"); }
+  catch (e) { S.copy = text; render(); const t = $("#copybox"); if (t) { t.focus(); t.select(); } }
+}
+function flash(msg) { const el = $("#flash"); if (el) { el.textContent = msg; setTimeout(() => { if (el.textContent === msg) el.textContent = ""; }, 2200); } }
+
+
+/* ---------- leaderboard backend (db capability) ---------- */
+// Canonical address friends should open. Swap for your own domain when this moves off the artifact host.
+const SHARE_BASE = location.origin + location.pathname;
+const BE = { db: null, user: null, dl: null, uid: null, canWrite: null, isOwner: false, ready: false, me: null,
+  boards: { classic: [], expert: [] }, loaded: { classic: false, expert: false } };
+const canJoin = () => !!(BE.ready && BE.uid && BE.canWrite !== false);
+const MODE_LABEL = { classic: "Classic", expert: "Expert" };
+function scoreOf(rows, seed) {
+  const sum = summarise(rows), run = runSeason(rows, seed);
+  const w = run.filter(r => r.win).length;
+  return { wins: w, expected: sum.expectedWins, score: w * 100 + Math.round(sum.expectedWins * 10), tier: tierFor(sum.expectedWins, w) };
+}
+// Scores are recomputed from the stored stable + seed, so a hand-edited score never displays.
+function verifyEntry(d) {
+  try {
+    const ids = d.ids;
+    if (!Array.isArray(ids) || ids.length !== SLOTS.length || new Set(ids).size !== ids.length) return null;
+    const rows = ids.map((id, i) => { const h = HORSE_BY_ID[id]; if (!h || !eligible(h, SLOTS[i])) throw new Error("bad"); return evalPick(h, SLOTS[i]); });
+    const sc = scoreOf(rows, Number(d.seed) >>> 0);
+    if (sc.score !== d.score) return null;
+    return { uid: d.uid, name: String(d.name || "Player").replace(/[<>]/g, "").slice(0, 24), score: sc.score, wins: sc.wins, tier: sc.tier, ts: Number(d.ts) || 0 };
+  } catch (e) { return null; }
+}
+function boardRows(mode) {
+  return BE.boards[mode].map(verifyEntry).filter(Boolean).sort((a, b) => b.score - a.score || a.ts - b.ts).slice(0, 25);
+}
+async function initBackend() {
+  try {
+    if (!window.claude || !window.claude.use) return;
+    const [db, user, dl] = await Promise.all([claude.use("db"), claude.use("user"), claude.use("downloads")]);
+    BE.dl = dl;
+    if (!db || !user) return;
+    BE.db = db; BE.user = user;
+    BE.uid = await user.id(); BE.isOwner = await user.isOwner(); BE.canWrite = await user.can("data.write");
+    BE.ready = true;
+    if (BE.uid) { try { const s = await db.doc("data/users/" + BE.uid + "/profile").get(); if (s.exists) BE.me = s.data(); } catch (e) {} }
+    ["classic", "expert"].forEach(m => {
+      db.collection("board_" + m).orderBy("score", "desc").limit(60).onSnapshot(snap => {
+        BE.boards[m] = snap.docs.map(d => Object.assign({}, d.data(), { uid: d.id })); BE.loaded[m] = true;
+        if (S.screen === "board") render();
+      }, () => { BE.loaded[m] = true; if (S.screen === "board") render(); });
+    });
+    render();
+  } catch (e) { /* leaderboard stays unavailable; the game itself is unaffected */ }
+}
+async function joinBoard(name, email, optIn) {
+  await BE.db.doc("entrants/" + BE.uid).set({ name, email, optIn, joinedAt: Date.now() });   // owner-readable only (see rules)
+  await BE.db.doc("data/users/" + BE.uid + "/profile").set({ name, email, optIn });         // private to this player
+  BE.me = { name, email, optIn };
+}
+async function submitScore() {
+  if (!BE.me || !canJoin() || !S.run || !S.done) return;
+  const sc = scoreOf(S.rows, S.seed), mode = S.mode;
+  S.lbMsg = "Saving your score…"; render();
+  try {
+    const ref = BE.db.doc("board_" + mode + "/" + BE.uid), cur = await ref.get();
+    if (cur.exists && Number(cur.data().score) >= sc.score) {
+      S.lbMsg = "Your best " + MODE_LABEL[mode] + " score (" + cur.data().score + ") still stands. This run scored " + sc.score + ".";
+    } else {
+      await ref.set({ name: BE.me.name, score: sc.score, wins: sc.wins, tier: sc.tier.id, ids: S.rows.map(r => r.horse.id), seed: S.seed, ts: Date.now() });
+      S.lbMsg = "Saved to the " + MODE_LABEL[mode] + " leaderboard with " + sc.score + " points.";
+    }
+  } catch (e) { S.lbMsg = "Couldn't save your score just now."; }
+  render();
+}
+function afterRun() { if (BE.me && canJoin()) submitScore(); }
+function openJoin() {
+  $("#modal").innerHTML = `<div class="modal-back" data-act="joinbg"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="jt">
+    <h3 id="jt">Join the leaderboard</h3>
+    <p class="note">Choose a display name for the board. Your email lets us recognise you and is stored privately: other players never see it.</p>
+    <div class="field"><label for="jn">Display name</label><input type="text" id="jn" maxlength="20" autocomplete="nickname" value="${esc(BE.me ? BE.me.name : "")}"></div>
+    <div class="field"><label for="je">Email</label><input type="email" id="je" maxlength="120" autocomplete="email" value="${esc(BE.me ? BE.me.email : "")}"></div>
+    <label class="chk"><input type="checkbox" id="jc1"><span>I agree my display name, score and stable are shown on the public leaderboard.</span></label>
+    <label class="chk"><input type="checkbox" id="jc2"><span>Optional: send me game updates and news. I can opt out at any time.</span></label>
+    <div class="err" id="jerr" role="alert"></div>
+    <div class="row"><button class="btn" id="jbtn" data-act="joinsubmit">Join${S.done ? " and save score" : ""}</button><button class="btn sec" data-act="joinclose">Cancel</button></div>
+  </div></div>`;
+  const n = $("#jn"); if (n && n.focus) n.focus();
+}
+function closeModal() { $("#modal").innerHTML = ""; }
+async function submitJoin() {
+  const name = $("#jn").value.replace(/[\u0000-\u001f<>]/g, "").trim(), email = $("#je").value.trim(), optIn = !!$("#jc2").checked, err = $("#jerr");
+  if (name.length < 2 || name.length > 20) { err.textContent = "Display name must be 2-20 characters."; return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 120) { err.textContent = "Enter a valid email address."; return; }
+  if (!$("#jc1").checked) { err.textContent = "Please agree to appear on the leaderboard."; return; }
+  $("#jbtn").disabled = true; err.textContent = "";
+  try {
+    await joinBoard(name, email, optIn); closeModal();
+    if (S.done) await submitScore(); else render();
+  } catch (e) {
+    $("#jbtn").disabled = false;
+    err.textContent = e && e.code === "invalid_argument" ? "You need Contributor access to this page to join the leaderboard." : "Couldn't sign you in. Please try again.";
+  }
+}
+async function exportEntrants() {
+  try {
+    const snap = await BE.db.collection("entrants").get();
+    const q = v => { let s = String(v == null ? "" : v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; };
+    const lines = ["name,email,marketing_opt_in,joined"].concat(snap.docs.map(d => { const x = d.data();
+      return [x.name, x.email, x.optIn ? "yes" : "no", new Date(x.joinedAt || 0).toISOString()].map(q).join(","); }));
+    await BE.dl.save({ filename: "8-0-signups.csv", data: lines.join("\n") });
+  } catch (e) { /* declined or unavailable */ }
+}
+
+/* ---------- sharing ---------- */
+function shareView() {
+  const link = shareLink(), text = headline(), full = text + " " + link, e = encodeURIComponent;
+  const native = typeof navigator !== "undefined" && navigator.share ? `<button class="sb" data-act="nativeshare">More…</button>` : "";
+  return `<div class="card"><h3>Challenge your friends</h3>
+    <p class="note" style="margin-top:4px">Send your result to a friend and see if they can beat it.</p>
+    <div class="sharegrid">
+      <a class="sb wa" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text=${e(full)}">WhatsApp</a>
+      <a class="sb" target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=${e(link)}&text=${e(text)}">Telegram</a>
+      <a class="sb" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=${e(text)}&url=${e(link)}">X</a>
+      <a class="sb" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=${e(link)}">Facebook</a>
+      <a class="sb" href="mailto:?subject=${e("Can you beat my 8-0 stable?")}&body=${e(full)}">Email</a>
+      <a class="sb" href="sms:?&body=${e(full)}">SMS</a>
+      ${native}
+      <button class="sb" data-act="copylink">Copy link</button>
+      <button class="sb" data-act="copytext">Copy result</button>
+    </div>
+    <input class="linkbox" id="linkfield" readonly value="${esc(link)}" aria-label="Result link">
+  </div>`;
+}
+async function nativeShare() {
+  try { await navigator.share({ title: "8-0 The Perfect Campaign", text: headline(), url: shareLink() }); }
+  catch (e) { if (!e || e.name !== "AbortError") copy(shareLink(), "Link"); }
+}
+
+/* ---------- leaderboard views ---------- */
+const BETTING_URL = "https://www.gambling.com/uk/betting-sites/horse-racing";
+function ctaView() {
+  return `<div class="card cta"><span class="ad">Ad</span>
+    <h3>Fancy backing a real horse?</h3>
+    <p>You've picked the champions. See how the best UK horse racing betting sites compare.</p>
+    <a class="btn" href="${BETTING_URL}" target="_blank" rel="noopener noreferrer sponsored" data-cta="horse-racing-betting">Compare horse racing betting sites</a>
+    <span class="rg">UK only. 18+. Gambling can be addictive, so please play responsibly. <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer">BeGambleAware.org</a></span></div>`;
+}
+function lbCard() {
+  if (!S.done || S.fromLink || !BE.ready) return "";
+  if (!canJoin()) return `<div class="card"><p class="note" style="margin:0">Your access to this page is view-only, so scores can't be saved to the leaderboard.</p></div>`;
+  if (!BE.me) return `<div class="card"><h3>Save this score</h3>
+    <p class="note" style="margin-top:4px">Join the ${MODE_LABEL[S.mode]} leaderboard with a display name and email. ${S.run ? `This run: ${scoreOf(S.rows, S.seed).score} points.` : ""}</p>
+    <div class="row" style="margin-top:10px"><button class="btn" data-act="join">Join the leaderboard</button></div></div>`;
+  return `<div class="card"><div class="row" style="justify-content:space-between"><span>${esc(S.lbMsg || "Saving your score…")}</span>
+    <button class="btn sec sm" data-act="board">View leaderboard</button></div></div>`;
+}
+function boardView() {
+  const m = S.boardMode || "classic";
+  const tabs = ["classic", "expert"].map(k => `<button class="tab ${k === m ? "on" : ""}" data-act="tab" data-mode="${k}">${MODE_LABEL[k]}</button>`).join("");
+  let body;
+  if (!BE.ready) body = `<p class="note">The leaderboard needs a signed-in view of this page. Open it from your claude.ai account to see and join the board.</p>`;
+  else if (!BE.loaded[m]) body = `<p class="note">Loading scores…</p>`;
+  else {
+    const rows = boardRows(m);
+    body = rows.length ? rows.map((r, i) => `<div class="lbrow ${r.uid === BE.uid ? "me" : ""}">
+      <span class="rank">${i + 1}</span>
+      <span><span class="nm">${esc(r.name)}</span>${r.uid === BE.uid ? ` <span class="badge">you</span>` : ""}<br><span class="tr">${esc(r.tier.name)}</span></span>
+      <span class="tr">${r.wins}/8</span><span class="sc">${r.score}</span></div>`).join("")
+      : `<p class="note">No scores yet. Be the first on the board.</p>`;
+  }
+  const cta = BE.ready && canJoin() && !BE.me ? `<div class="row" style="margin-top:12px"><button class="btn" data-act="join">Join the leaderboard</button></div>` : "";
+  const owner = BE.ready && BE.isOwner && BE.dl ? `<div class="row" style="margin-top:12px"><button class="btn sec sm" data-act="export">Export sign-ups (CSV)</button><span class="note">Owner only</span></div>` : "";
+  return `<div class="sec-t"><span class="era">Leaderboard</span><button class="btn sec sm" data-act="back">Back</button></div>
+    <div class="tabs">${tabs}</div>
+    <div class="card">${body}</div>
+    <p class="note">Score = 100 points per win + 10 per expected win. Each player's best run per mode counts, and scores are re-checked from the saved stable before they show.</p>${cta}${owner}`;
+}
+
+
+
+/* ---------- views ---------- */
+function modeView() {
+  return `
+  <div class="card hero">
+    <h2>Can your stable go 8 for 8?</h2>
+    <p>Spin an era of racing history, draft one horse at a time into eight stables, and see if your stable can win every race on the campaign.</p>
+    <button class="btn sec aboutbtn" data-act="about">How to play &amp; FAQ</button>
+  </div>
+  <div class="steps">
+    <div><b>1. Spin for horses.</b> Draw a list of horses from a random era of racing.</div>
+    <div><b>2. Pick its stable.</b> Tap a horse, then the stable you want it to race in.</div>
+    <div><b>3. Run the season.</b> Eight horses later, see how many races you win.</div>
+  </div>
+  <div class="sec-t"><span>Choose a mode to start</span></div>
+  <div class="modes" style="margin-top:0">
+    <button class="mode" data-act="start" data-mode="classic"><b>Classic</b><span>Ratings and win chances on show. Build the strongest stable you can.</span><span class="go">Start Classic →</span></button>
+    <button class="mode" data-act="start" data-mode="expert"><b>Expert</b><span>Names, years and distances only. Draft on pure racing knowledge; the numbers appear at the end.</span><span class="go">Start Expert →</span></button>
+  </div>
+`;
+}
+function openAbout() {
+  $("#modal").innerHTML = `<div class="modal-back" data-act="joinbg"><div class="modal" role="dialog" aria-modal="true">
+    ${aboutView()}<div class="row" style="margin-top:12px"><button class="btn" data-act="joinclose">Close</button></div></div></div>`;
+}
+
+function aboutView() {
+  const slotList = SLOTS.map(s => `<li><b>${s.label}</b>: ${s.sub}</li>`).join("");
+  return `<section class="about" id="about">
+    <h2>About 8-0</h2>
+    <p>8-0 is a free online horse racing game where you build a stable of eight champions and find out whether it could win every race on a Group 1 campaign: eight runners, eight wins, no excuses. Spin for real racehorses from racing history, draft your stable horse by horse, and see how your dream team would stack up from sprint to stayer.</p>
+
+    <h3>How it works</h3>
+    <ol>
+      <li><b>Pick your mode.</b> Classic shows the ratings. Expert hides them.</li>
+      <li><b>Spin</b> to draw a pool of horses from a random era of racing.</li>
+      <li><b>Draft</b> one horse into an open slot. Tap the horse, then tap the slot.</li>
+      <li><b>Repeat for eight rounds</b> until every stable is full.</li>
+      <li><b>Run the season</b> to get your projected record and the tier your stable earns, from a Seller all the way up to the legendary 8-0 Perfect Campaign.</li>
+    </ol>
+
+    <h3>The 8-0 challenge</h3>
+    <p>Unbeaten careers are the stuff of legend: Kincsem won all 54 of her races, Black Caviar won 25 from 25, Frankel 14 from 14, and Winx won 33 in a row. But no single horse wins over every distance, which is why you need eight. Winning every race on the card is achievable in the game, but deliberately punishing. You will need an elite horse in every slot, a good fit between each horse and its distance, and very little bad luck.</p>
+
+    <h3>The eight slots</h3>
+    <p>Your stable has one horse for each type of race. Horses race best over a certain range of distances, so a horse placed outside its range loses rating for every furlong it is out of its depth.</p>
+    <ul>${slotList}</ul>
+
+    <h3>Game modes</h3>
+    <ul>
+      <li><b>Classic:</b> full ratings and win chances are on show. Draft the strongest stable you can.</li>
+      <li><b>Expert:</b> ratings and win chances are hidden. You see only names, years and distances, and draft on pure racing knowledge. The numbers are revealed at the end.</li>
+    </ul>
+
+    <h3>Frequently asked questions</h3>
+    <details><summary>Is 8-0 free to play?</summary><p>Yes. It is completely free and runs in your browser. There is nothing to download.</p></details>
+    <details><summary>Which horses and eras can I draw?</summary><p>A hand-picked set of ${HORSES.length} champion horse-seasons from 1878 to 2025, grouped into four eras: the legends before 2000, and the 2000s, 2010s and 2020s. They come from Britain and Ireland, France, Australia, Japan, the USA and Hong Kong. Ratings in this version are approximate and are not official figures.</p></details>
+    <details><summary>Can you really go 8-0?</summary><p>Yes, but it is very rare. You need top-rated horses in all eight slots, each running over a distance that suits it. Most stables land somewhere between a selling race and a Group 1 challenge.</p></details>
+    <details><summary>How is my record worked out?</summary><p>Each horse's rating is adjusted for how well its distance suits the slot, about 4% lower for every furlong outside its range. That gives a win chance for each race, and the eight chances multiply into your chance of a perfect 8-0. Then the season is actually run, with a fixed random draw, so the same result link always replays the same way.</p></details>
+    <details><summary>What are re-spins?</summary><p>If a pool has nothing you want, you can spin again up to three times per game.</p></details>
+    <details><summary>Do I need an account?</summary><p>No sign-up is needed to play. Where a leaderboard is available, you can optionally join it with a display name and email to save your score.</p></details>
+  </section>`;
+}
+function trackSvg() {
+  const ticks = [[200, 23], [200, 277], [25, 150], [375, 150]].map(x => "").join("");
+  return `<svg class="trk" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+    <defs><pattern id="turf" width="400" height="26" patternUnits="userSpaceOnUse">
+      <rect width="400" height="26" fill="#2f6b42"/><rect width="400" height="13" fill="#35794b"/></pattern></defs>
+    <rect width="400" height="300" fill="url(#turf)"/>
+    <ellipse cx="200" cy="150" rx="172" ry="120" fill="none" stroke="#caa96e" stroke-width="30"/>
+    <ellipse cx="200" cy="150" rx="187" ry="135" fill="none" stroke="#ffffff" stroke-width="2.5" opacity=".85"/>
+    <ellipse cx="200" cy="150" rx="157" ry="105" fill="none" stroke="#ffffff" stroke-width="2.5" opacity=".85"/>
+    <ellipse cx="200" cy="150" rx="156" ry="104" fill="#3b8354" opacity=".5"/>
+    <rect x="198" y="256" width="4" height="29" fill="#ffffff" opacity=".95"/>
+    <rect x="193" y="240" width="14" height="9" rx="2" fill="#ffffff"/>
+    <rect x="196" y="240" width="8" height="22" fill="#ffffff"/>
+    <g fill="#ffffff" opacity=".6">
+      <rect x="27" y="146" width="3" height="9"/><rect x="370" y="146" width="3" height="9"/>
+      <rect x="198" y="17" width="3" height="9"/><rect x="100" y="34" width="3" height="9"/><rect x="297" y="34" width="3" height="9"/>
+    </g></svg>`;
+}
+const POS = { juv: [30, 34], spr: [43.5, 34], mile: [57, 34], mid: [70.5, 34], cl: [30, 66], stay: [43.5, 66], fil: [57, 66], wild: [70.5, 66] };
+function fitClass(gap) { return gap === 0 ? "good" : gap <= 3 ? "amber" : "bad"; }
+function yardView() {
+  const selH = S.sel ? HORSE_BY_ID[S.sel] : null;
+  const cells = SLOTS.map((s, i) => {
+    const f = S.stable[s.id], elig = !f && selH && eligible(selH, s), xy = POS[s.id];
+    const cls = "pos" + (f ? " full" : "") + (S.pop === i ? " pop" : "") + (selH && !f ? (elig ? " elig" : " out") : "");
+    const tag = elig ? "button" : "div";
+    let fit = esc(s.sub.split(" · ")[0]), fcls = "";
+    if (f) { fit = (f.gap === 0 ? "Fits" : f.gap + "f off") + (S.mode === "classic" ? " · " + pct(f.p) : ""); fcls = " " + fitClass(f.gap); }
+    else if (elig) { const e = evalPick(selH, s); fit = (s.flat ? "any" : e.gap === 0 ? "Fits" : e.gap + "f off") + (S.mode === "classic" ? " · " + pct(e.p) : ""); fcls = " " + fitClass(e.gap); }
+    return `<${tag} class="${cls}" style="left:${xy[0]}%;top:${xy[1]}%" ${elig ? `data-act="slot" data-id="${s.id}"` : ""}
+      ${elig ? `aria-label="Place ${esc(selH.name)} in the ${esc(s.label)} stable"` : ""}>
+      <span class="box"><svg viewBox="0 0 64 60" aria-hidden="true">
+        <polygon class="st-roof" points="4,26 32,6 60,26"/><text class="st-num" x="32" y="22" text-anchor="middle">${i + 1}</text>
+        <rect class="st-body" x="8" y="26" width="48" height="30" rx="2"/><rect class="st-in" x="20" y="32" width="24" height="24"/>
+        <text class="nagg" x="32" y="52" text-anchor="middle">🐎</text>
+        <rect class="st-door dl" x="20" y="32" width="12" height="24"/><rect class="st-door dr" x="32" y="32" width="12" height="24"/>
+      </svg></span>
+      <span class="pn">${f ? esc(f.horse.name) : esc(s.label)}</span>
+      <span class="pf${fcls}">${fit}</span>
+    </${tag}>`;
+  }).join("");
+  return `<div class="yardbox" id="yard"><div class="yard">${trackSvg()}${cells}</div>
+    <div class="yardfoot">${filled()} of 8 stables filled${selH ? " · tap a highlighted stable for " + esc(selH.name) : ""}</div></div>`;
+}
+function legendView() {
+  const classic = S.mode === "classic";
+  return `<details class="legend" ${S.legend ? "open" : ""}><summary>What do the slot tags mean?</summary>
+    <p>Each horse raced best over a certain distance, and each stable is a different type of race. Put a horse in a stable outside its range and it loses rating, so where you place it matters.</p>
+    <div class="lg">
+      <span class="chip good">Fits</span><span>The horse's distance range overlaps the slot. Full rating, no penalty.</span>
+      <span class="chip amber">1-3f off</span><span>Slightly outside its range. Rating drops 4% for each furlong outside, so 2f off is 8% lower.</span>
+      <span class="chip bad">4f+ off</span><span>Well outside its range. Same 4% per furlong, capped at a 40% cut. Usually a poor pick.</span>
+      <span class="chip good">Wildcard</span><span>Any horse can run here at a flat 5% penalty, whatever its distance.</span>
+      ${classic ? `<span class="chip good">74%</span><span>The horse's chance of winning that race after the penalty. All eight multiply together for an 8-0.</span>` : ""}
+    </div>
+    <p>"f" means furlongs (1 furlong = 1/8 mile). Restricted slots (Juvenile, Filly / Mare) grey out for horses that don't qualify.</p></details>`;
+}
+function listView() {
+  const selH = S.sel ? HORSE_BY_ID[S.sel] : null, open = openSlots();
+  const head = `<div class="ph"><div><div class="era">${S.spinning ? "Spinning…" : S.pool ? esc(S.pool.era.label) : "Your horses"}</div>
+      <div class="sub">Horse ${Math.min(filled() + 1, 8)} of 8</div></div>
+      ${S.pool && !S.spinning ? `<button class="btn sec sm" data-act="respin" ${S.respins > 0 ? "" : "disabled"}>Re-spin (${S.respins})</button>` : ""}</div>`;
+  if (S.spinning) {
+    const hit = S.pending ? reelTargetIndex(S.pending.era.id) : -1;
+    const rows = reelItems().map((e, i) => `<div class="reelrow${i === hit ? " hit" : ""}">${esc(e.label)}</div>`).join("");
+    return `<div class="panel" id="list">${head}<div class="reelbox">
+      <div class="reelwin" id="reelwin"><div class="reelstrip" id="reelstrip">${rows}</div><div class="reelmark"></div></div>
+      <p class="cap">Spinning for an era of racing…</p></div></div>`;
+  }
+  if (!S.pool) return `<div class="panel" id="list">${head}<div class="spinwrap">
+      <p class="note" style="margin:0 0 14px">Spin to draw ${filled() === 0 ? "your first" : "the next"} list of horses from a random era.</p>
+      <button class="btn big" data-act="spin">Spin for horses</button></div></div>`;
+  const prompt = selH ? `<div class="prompt"><b>${esc(selH.name)} selected.</b> Tap a highlighted stable.</div>`
+    : `<div class="prompt">Tap a horse to select it, then choose its stable.</div>`;
+  const rows = S.pool.horses.map(h => {
+    const ok = open.some(s => eligible(h, s));
+    return `<button class="prow${S.sel === h.id ? " sel" : ""}" ${ok ? `data-act="pick" data-id="${h.id}"` : "disabled"}>
+      <span class="tag${h.juv ? " juv" : ""}">${h.juv ? "2YO" : (h.minF === h.maxF ? h.minF + "f" : h.minF + "-" + h.maxF + "f")}</span>
+      <span class="mid"><span class="nm">${esc(h.name)}</span><span class="me">${h.year} · ${GROUPS[h.grp]} · ${h.sex === "f" ? "filly/mare" : "colt/gelding"}${h.juv ? " · " + h.minF + "-" + h.maxF + "f" : ""}</span></span>
+      ${S.mode === "classic" ? `<span class="rt">${Math.round(h.norm)}</span>` : ""}</button>`;
+  }).join("");
+  return `<div class="panel" id="list">${head}${prompt}<div class="plist">${rows}</div></div>`;
+}
+function draftView() {
+  if (S.complete) return `<div class="banner top"><h2>All 8 stables full</h2><p>Heading to the starting stalls…</p></div>${yardView()}`;
+  return `<div class="draft">${listView()}${yardView()}</div>${legendView()}`;
+}
+function resultView() {
+  const classic = S.mode === "classic", show = classic || S.done;
+  const sm = S.sum;
+  let head = "";
+  if (S.done) {
+    const w = wins(), t = tierFor(sm.expectedWins, w);
+    head = `<div class="banner ${t.id === "perfect" ? "top" : ""}"><h2>${t.name}</h2>
+      <p>${w} win${w === 1 ? "" : "s"} from 8 · ${TIER_BLURB[t.id]}</p></div>`;
+  }
+  const stats = show ? `<div class="stats">
+      <div class="stat"><b>${sm.expectedWins.toFixed(1)}</b><span>Expected wins of 8</span></div>
+      <div class="stat"><b>${pperf(sm.pPerfect)}</b><span>Chance of 8-0</span></div>
+      <div class="stat"><b>${esc(sm.weakest.slot.label)}</b><span>Weakest link · ${esc(sm.weakest.horse.name)} (${pct(sm.weakest.p)})</span></div>
+    </div>` : `<p class="note">Expert mode: ratings and win chances are revealed after the season.</p>`;
+  const rows = S.rows.map((r, i) => {
+    let res = `<span class="res p">${S.run ? "…" : ""}</span>`;
+    if (S.run && i < S.shown) { const x = S.run[i]; res = `<span class="res ${x.win ? "w" : "l"}">${x.win ? "WON" : ordinal(x.pos)}</span>`; }
+    const meta = show ? `Rating ${Math.round(r.horse.norm)} · ${r.gap === 0 ? "fits" : r.gap + "f outside range"} · ${pct(r.p)} to win` : `${r.horse.year} · ${GROUPS[r.horse.grp]}`;
+    return `<div class="rrow"><div class="sn">${esc(r.slot.label)}</div>
+      <div><div class="hn">${esc(r.horse.name)} <span class="hm">${r.horse.year}</span></div><div class="hm">${meta}</div></div>${res}</div>`;
+  }).join("");
+  const actions = !S.run ? `<button class="btn big" data-act="run">Run the season</button>` :
+    S.done ? `${BE.ready ? `<button class="btn sec" data-act="board">Leaderboard</button>` : ""}
+      <button class="btn sec" data-act="home">Home</button>
+      <button class="btn" data-act="again">${S.fromLink ? "Build your own stable" : "Play again"}</button>` : `<span class="note">Racing…</span>`;
+  return `${head}<div class="card">${stats}${rows}</div>
+    <div class="actions">${actions}<span id="flash" class="note" role="status"></span></div>
+    ${S.done ? `<div class="stack" style="margin-top:14px">${lbCard()}${shareView()}${ctaView()}</div>` : ""}
+    ${S.copy ? `<textarea id="copybox" readonly>${esc(S.copy)}</textarea>` : ""}`;
+}
+function render() {
+  const app = $("#app");
+  app.innerHTML = S.screen === "mode" ? modeView() : S.screen === "draft" ? draftView() : S.screen === "board" ? boardView() : resultView();
+  $("#pill").innerHTML = `<div class="navr">` +
+    (S.screen === "mode" || S.screen === "board" ? "" : `<span class="pill">${MODE_LABEL[S.mode]}</span>`) +
+    (BE.ready && S.screen !== "board" ? `<button class="btn sec sm" data-act="board">Leaderboard</button>` : "") +
+    (BE.me ? `<span class="pill">${esc(BE.me.name)}</span>` : "") + `</div>`;
+  if (S.scrollTo) { const el = $(S.scrollTo); S.scrollTo = null; if (el && el.scrollIntoView) el.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" }); }
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-act]"); if (!t) return;
+  const a = t.dataset.act;
+  if (S.spinning && a !== "joinbg" && a !== "joinclose") return;
+  if (a === "joinbg" && e.target !== t) return;
+  if (a === "start") startGame(t.dataset.mode);
+  else if (a === "spin") spin();
+  else if (a === "respin") respin();
+  else if (a === "pick") pickHorse(t.dataset.id);
+  else if (a === "about") openAbout();
+  else if (a === "slot") place(t.dataset.id);
+  else if (a === "run") runIt();
+  else if (a === "copytext") copy(shareText(), "Result");
+  else if (a === "copylink") copy(shareLink(), "Link");
+  else if (a === "nativeshare") nativeShare();
+  else if (a === "join") openJoin();
+  else if (a === "joinsubmit") submitJoin();
+  else if (a === "joinclose" || a === "joinbg") closeModal();
+  else if (a === "board") { if (S.screen !== "board") S.prev = S.screen; S.screen = "board"; render(); window.scrollTo(0, 0); }
+  else if (a === "back") { S.screen = S.prev || "mode"; render(); window.scrollTo(0, 0); }
+  else if (a === "tab") { S.boardMode = t.dataset.mode; render(); }
+  else if (a === "export") exportEntrants();
+  else if (a === "again") { const m = S.mode; clearHash(); S = fresh(); startGame(m); window.scrollTo(0, 0); }
+  else if (a === "home") {
+    if (S.screen === "draft" && filled() > 0 && !S.complete && !confirm("Leave this game? Your stable so far will be lost.")) return;
+    clearHash(); S = fresh(); render(); window.scrollTo(0, 0);
+  }
+});
+document.addEventListener("toggle", e => { if (e.target.classList && e.target.classList.contains("legend")) S.legend = e.target.open; }, true);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#modal").innerHTML) closeModal(); });
+if (!loadHash()) S = fresh();
+render();
+initBackend();
+</script>
+</body>
+</html>
